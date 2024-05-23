@@ -1,0 +1,37 @@
+而从过往经验来看，很多刚变动的数据有很大概率会被马上读取。所以，这个实现会有较好的缓存命中率。同时，当我们的数据被缓存后会根据配置设置一个 TTL，缓存在一段时间没有被读取的话，就会被 LRU 策略淘汰掉，这样还能节省缓存空间。
+
+
+1. 为什么百万并发系统不能直接使用 MySQL 服务？
+2. 为什么 Redis 内存相比磁盘，需要用更多的空间？
+3. 怎么保证条件查询缓存的数据一致性？
+4. 为什么高级语言不能直接做业务缓存服务？
+
+
+好，我们回头来整体看看 ClickHouse 的查询工作流程：
+1. 根据查询条件，查询过滤出需要读取的 data part 文件夹范围；
+2. 根据 data part 内数据的主键索引、过滤出要查询的 granule；
+
+
+{
+    "level":"debug",
+    "ts":"2021-02-11T09:55:45.914+0800",
+    "caller":"v3rpc/interceptor.go:181",
+    "msg":"request stats",
+    "start time":"2021-02-11T09:55:45.911+0800",
+    "time spent":"2.697925ms",
+    "remote":"127.0.0.1:44822",
+    "response type":"/etcdserverpb.KV/Txn",
+    "request count":1,
+    "request size":479,
+    "response count":0,
+    "response size":44,
+    "request content":"compare:<target:MOD key:"/registry/deployments/default/nginx-deployment" mod_revision:0 > success:<request_put:<key:"/registry/deployments/default/nginx-deployment" value_size:421 >> failure:<>"
+}
+
+
+var  tags = ["nosql", "mongodb", "document", "developer", "popular"]
+var types = ["technology", "sociality", "travel", "novel", "literature"]
+var books = []
+for (var i = 0; i < 50; i++)
+
+
